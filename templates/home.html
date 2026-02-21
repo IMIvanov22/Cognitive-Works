@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}SkinCare AI — Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <h1 class="h1">Discover Your Perfect<br />Skincare Routine</h1>
+      <p class="lead">
+        Upload a selfie and let our AI analyze your skin type. Get personalized product
+        recommendations tailored just for you.
+      </p>
+
+      <div class="card card--pad">
+        <div class="card__title">Try It Now</div>
+        <form class="upload" action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data">
+          <label class="dropzone" for="selfie">
+            <div class="dropzone__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 7l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 14v4a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="dropzone__text" data-file-label>Click to upload your selfie</div>
+            <div class="dropzone__meta">PNG, JPG up to 10MB</div>
+          </label>
+          <input
+            id="selfie"
+            name="selfie"
+            type="file"
+            accept="image/png,image/jpeg"
+            class="sr-only"
+            data-file-input
+          />
+
+          <button class="btn btn--primary btn--full" type="submit" data-analyze-btn disabled>
+            Analyze
+          </button>
+        </form>
+      </div>
+
+      <div class="hero__actions">
+        <a class="btn btn--soft" href="{{ url_for('register') }}">Create Account</a>
+        <a class="btn btn--ghost" href="{{ url_for('login') }}">Sign In</a>
+      </div>
+    </div>
+
+    <div class="hero__media">
+      <div class="media-card">
+        <img
+          class="media-card__img"
+          src="{{ url_for('static', filename='images/hero-person.svg') }}"
+          alt="Skincare lifestyle photo placeholder"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="h2 center">How It Works</h2>
+
+    <div class="grid3">
+      <div class="card card--step">
+        <div class="step-icon step-icon--pink" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7z" stroke="currentColor" stroke-width="2"/>
+            <path d="M9 10h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="step-title">1. Take a Selfie</div>
+        <div class="muted">Simply upload a photo of your face in natural lighting for the best results.</div>
+      </div>
+
+      <div class="card card--step">
+        <div class="step-icon step-icon--purple" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2l1.2 5.2L18 8.5l-4.2 2.6L12 17l-1.8-5.9L6 8.5l4.8-1.3L12 2z" fill="currentColor" opacity="0.8"/>
+            <path d="M19.5 12.5l.6 2.4 2.4.6-2.4.6-.6 2.4-.6-2.4-2.4-.6 2.4-.6.6-2.4z" fill="currentColor" opacity="0.55"/>
+          </svg>
+        </div>
+        <div class="step-title">2. AI Analysis</div>
+        <div class="muted">Our advanced AI determines if your skin is dry, normal, or oily.</div>
+      </div>
+
+      <div class="card card--step">
+        <div class="step-icon step-icon--blue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 7h10v14H7V7z" stroke="currentColor" stroke-width="2"/>
+            <path d="M9 3h6v4H9V3z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="step-title">3. Get Recommendations</div>
+        <div class="muted">Receive personalized skincare product suggestions perfect for your skin type.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--split">
+  <div class="container split">
+    <div class="split__media">
+      <div class="media-card media-card--wide">
+        <img
+          class="media-card__img"
+          src="{{ url_for('static', filename='images/product-tube.svg') }}"
+          alt="Product placeholder"
+        />
+      </div>
+    </div>
+
+    <div class="split__copy">
+      <h2 class="h2">Why Choose SkinCare AI?</h2>
+      <ul class="checklist">
+        <li><span class="check" aria-hidden="true">✓</span> <span><strong>Accurate AI Technology</strong><br /><span class="muted">Our AI is trained on thousands of skin types for precise analysis.</span></span></li>
+        <li><span class="check" aria-hidden="true">✓</span> <span><strong>Personalized Recommendations</strong><br /><span class="muted">Get product suggestions tailored to your unique skin needs.</span></span></li>
+        <li><span class="check" aria-hidden="true">✓</span> <span><strong>Quick &amp; Easy</strong><br /><span class="muted">Results in seconds - no complicated questionnaires needed.</span></span></li>
+        <li><span class="check" aria-hidden="true">✓</span> <span><strong>Expert-Curated Products</strong><br /><span class="muted">All recommendations are from trusted skincare brands.</span></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section--cta">
+  <div class="container cta">
+    <h2 class="h2 center">Ready to Transform Your Skin?</h2>
+    <p class="center muted">Join thousands of users who have discovered their perfect skincare routine.</p>
+    <div class="center">
+      <a class="btn btn--primary" href="{{ url_for('register') }}">Create Free Account</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

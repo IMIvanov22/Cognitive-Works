@@ -1,40 +1,74 @@
 {% extends 'base.html' %}
 
-{% block title %}Register • AnemiaCare{% endblock %}
+{% block title %}SkinCare AI — Register{% endblock %}
 
 {% block content %}
-<section class="hero hero--auth">
-  <div class="container hero__inner">
-    <div class="hero__icon" aria-hidden="true">
-      <svg viewBox="0 0 48 48" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6 26h10l5-12 6 20 4-8h11" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
-    </div>
-
-    <h1 class="hero__title">Create Account</h1>
-    <p class="hero__subtitle">Join us to access anemia screening tools</p>
-
-    <div class="card card--auth">
-      <div class="card__header">
-        <p class="card__title">Register</p>
-        <p class="card__hint">Enter your information to create your account</p>
+<section class="auth">
+  <div class="container auth__grid auth__grid--reverse">
+    <div class="auth__panel">
+      <div class="auth__brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2l1.2 5.2L18 8.5l-4.2 2.6L12 17l-1.8-5.9L6 8.5l4.8-1.3L12 2z" fill="currentColor" opacity="0.9"/>
+          </svg>
+        </span>
+        <span class="brand__text">SkinCare AI</span>
       </div>
 
-      <form class="authForm" action="#" method="post" autocomplete="on">
-        <div class="field">
-          <label class="field__label" for="username">Username <span class="req">*</span></label>
-          <input class="field__input" id="username" name="username" type="text" placeholder="johndoe" autocomplete="username" required />
+      <h1 class="h2">Create Your Account</h1>
+      <p class="muted">Start your journey to perfect skin today</p>
+
+      <form class="form" method="post" action="{{ url_for('register') }}">
+        <label class="field">
+          <div class="field__label">Username</div>
+          <div class="field__control">
+            <span class="field__icon" aria-hidden="true">👤</span>
+            <input class="input" type="text" name="username" placeholder="johndoe" required />
+          </div>
+        </label>
+
+        <label class="field">
+          <div class="field__label">Password</div>
+          <div class="field__control">
+            <span class="field__icon" aria-hidden="true">🔒</span>
+            <input class="input" type="password" name="password" placeholder="••••••••" required />
+          </div>
+        </label>
+
+        <label class="field">
+          <div class="field__label">Confirm Password</div>
+          <div class="field__control">
+            <span class="field__icon" aria-hidden="true">🔒</span>
+            <input class="input" type="password" name="password2" placeholder="••••••••" required />
+          </div>
+        </label>
+
+        <button class="btn btn--primary btn--full" type="submit">Create Account</button>
+
+        <div class="center muted small">
+          Already have an account?
+          <a class="link" href="{{ url_for('login') }}">Sign in</a>
         </div>
 
-        <div class="field">
-          <label class="field__label" for="password">Password <span class="req">*</span></label>
-          <input class="field__input" id="password" name="password" type="password" placeholder="••••••••" autocomplete="new-password" required />
+        <div class="divider"></div>
+        <div class="muted tiny center">
+          By creating an account, you agree to our Terms of Service and Privacy Policy.
         </div>
-
-        <button class="btn btn--primary btn--block" type="submit">Create Account</button>
-
-        <p class="authNote">Already have an account? <a class="link" href="{{ url_for('login') }}">Sign in</a></p>
       </form>
+    </div>
+
+    <div class="auth__media">
+      <div class="media-card media-card--wide">
+        <img
+          class="media-card__img"
+          src="{{ url_for('static', filename='images/flowers.svg') }}"
+          alt="Discover your skin type image placeholder"
+        />
+      </div>
+      <div class="auth__caption">
+        <div class="auth__captionTitle">Discover Your Skin Type</div>
+        <div class="muted">Join thousands of happy users finding their perfect skincare routine</div>
+      </div>
     </div>
   </div>
 </section>

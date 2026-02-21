@@ -1,41 +1,60 @@
 {% extends 'base.html' %}
 
-{% block title %}Login • AnemiaCare{% endblock %}
+{% block title %}SkinCare AI — Login{% endblock %}
 
 {% block content %}
-<section class="hero hero--auth">
-  <div class="container hero__inner">
-    <div class="hero__icon" aria-hidden="true">
-      <svg viewBox="0 0 48 48" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6 26h10l5-12 6 20 4-8h11" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
+<section class="auth">
+  <div class="container auth__grid">
+    <div class="auth__media">
+      <div class="media-card media-card--wide">
+        <img
+          class="media-card__img"
+          src="{{ url_for('static', filename='images/hero-person.svg') }}"
+          alt="Welcome back image placeholder"
+        />
+      </div>
+      <div class="auth__caption">
+        <div class="auth__captionTitle">Welcome Back!</div>
+        <div class="muted">Continue your skincare journey with personalized AI recommendations</div>
+      </div>
     </div>
 
-    <h1 class="hero__title">Welcome Back</h1>
-    <p class="hero__subtitle">Sign in to access your account</p>
-
-    <div class="card card--auth">
-      <div class="card__header">
-        <p class="card__title">Login</p>
-        <p class="card__hint">Enter your credentials to access your account</p>
+    <div class="auth__panel">
+      <div class="auth__brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2l1.2 5.2L18 8.5l-4.2 2.6L12 17l-1.8-5.9L6 8.5l4.8-1.3L12 2z" fill="currentColor" opacity="0.9"/>
+          </svg>
+        </span>
+        <span class="brand__text">SkinCare AI</span>
       </div>
 
-      <form class="authForm" action="#" method="post" autocomplete="on">
-        <div class="field">
-          <label class="field__label" for="username">Username <span class="req">*</span></label>
-          <input class="field__input" id="username" name="username" type="text" placeholder="johndoe" autocomplete="username" required />
-        </div>
+      <h1 class="h2">Welcome Back</h1>
+      <p class="muted">Sign in to access your personalized skincare profile</p>
 
-        <div class="field">
-          <div class="authRow">
-            <label class="field__label" for="password">Password <span class="req">*</span></label>
+      <form class="form" method="post" action="{{ url_for('login') }}">
+        <label class="field">
+          <div class="field__label">Username</div>
+          <div class="field__control">
+            <span class="field__icon" aria-hidden="true">👤</span>
+            <input class="input" type="text" name="username" placeholder="johndoe" required />
           </div>
-          <input class="field__input" id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" required />
+        </label>
+
+        <label class="field">
+          <div class="field__label">Password</div>
+          <div class="field__control">
+            <span class="field__icon" aria-hidden="true">🔒</span>
+            <input class="input" type="password" name="password" placeholder="••••••••" required />
+          </div>
+        </label>
+
+        <button class="btn btn--primary btn--full" type="submit">Sign In</button>
+
+        <div class="center muted small">
+          Don't have an account?
+          <a class="link" href="{{ url_for('register') }}">Create one</a>
         </div>
-
-        <button class="btn btn--primary btn--block" type="submit">Sign In</button>
-
-        <p class="authNote">Don't have an account? <a class="link" href="{{ url_for('register') }}">Sign up</a></p>
       </form>
     </div>
   </div>

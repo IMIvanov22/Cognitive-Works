@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2f4f7"/>
+      <stop offset="1" stop-color="#e6e9ef"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b2a30"/>
+      <stop offset="1" stop-color="#5a5563"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" rx="36" fill="url(#bg)"/>
+  <rect x="70" y="90" width="1060" height="620" rx="28" fill="#ffffff" opacity="0.55"/>
+  <g transform="translate(610 430)">
+    <path d="M-220 120c40-200 80-260 220-260s180 60 220 260" fill="url(#hair)" opacity="0.95"/>
+    <ellipse cx="0" cy="20" rx="150" ry="190" fill="#f1d5c6"/>
+    <path d="M-170 70c10 120 70 220 170 220s160-100 170-220" fill="#eecdbd" opacity="0.65"/>
+    <circle cx="-55" cy="20" r="14" fill="#2b2a30" opacity="0.75"/>
+    <circle cx="55" cy="20" r="14" fill="#2b2a30" opacity="0.75"/>
+    <path d="M-40 90c30 25 50 25 80 0" fill="none" stroke="#b96d6d" stroke-width="10" stroke-linecap="round"/>
+    <path d="M-220 120c30-80 55-125 110-165 30-22 75-35 110-35s80 13 110 35c55 40 80 85 110 165" fill="url(#hair)"/>
+    <path d="M-180 250c60-40 120-60 180-60s120 20 180 60v170H-180V250z" fill="#12141b" opacity="0.92"/>
+    <rect x="-85" y="210" width="170" height="120" rx="22" fill="#ffffff" opacity="0.13"/>
+  </g>
+  <g opacity="0.55" fill="#c7cbd6">
+    <rect x="110" y="140" width="980" height="10" rx="5"/>
+    <rect x="110" y="190" width="980" height="10" rx="5"/>
+    <rect x="110" y="240" width="980" height="10" rx="5"/>
+    <rect x="110" y="290" width="980" height="10" rx="5"/>
+  </g>
+</svg>

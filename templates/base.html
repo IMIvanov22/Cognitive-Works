@@ -3,38 +3,70 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% block title %}AnemiaCare{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
-    {% block head %}{% endblock %}
+    <title>{% block title %}SkinCare AI{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   </head>
   <body>
     <header class="topbar">
       <div class="container topbar__inner">
         <a class="brand" href="{{ url_for('home') }}">
           <span class="brand__mark" aria-hidden="true">
-            <svg viewBox="0 0 48 48" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 26h10l5-12 6 20 4-8h11" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2l1.2 5.2L18 8.5l-4.2 2.6L12 17l-1.8-5.9L6 8.5l4.8-1.3L12 2z" fill="currentColor" opacity="0.9"/>
+              <path d="M19.5 12.5l.6 2.4 2.4.6-2.4.6-.6 2.4-.6-2.4-2.4-.6 2.4-.6.6-2.4z" fill="currentColor" opacity="0.55"/>
             </svg>
           </span>
-          <span class="brand__name">AnemiaCare</span>
+          <span class="brand__text">SkinCare AI</span>
         </a>
 
-        <nav class="nav" aria-label="Primary">
-          <a class="nav__link{% if active_page == 'diagnosis' %} nav__link--active{% endif %}" href="{{ url_for('home') }}">Diagnosis</a>
-          <a class="nav__link{% if active_page == 'about' %} nav__link--active{% endif %}" href="{{ url_for('about') }}">About</a>
-          <div class="nav__actions">
-            <a class="btn btn--ghost" href="{{ url_for('login') }}">Login</a>
-            <a class="btn btn--primary" href="{{ url_for('register') }}">Register</a>
-          </div>
+        <nav class="nav">
+          <a class="nav__link" href="{{ url_for('history') }}">My History</a>
+          <a class="nav__link" href="{{ url_for('login') }}">Login</a>
+          <a class="btn btn--primary" href="{{ url_for('register') }}">Get Started</a>
         </nav>
       </div>
     </header>
 
     <main>
+      <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-stack">
+              {% for category, message in messages %}
+                <div class="flash flash--{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+      </div>
+
       {% block content %}{% endblock %}
     </main>
 
-    <button class="help" type="button" aria-label="Help">?</button>
-    {% block scripts %}{% endblock %}
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="footer__muted">SkinCare AI • Demo Flask UI</div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const input = document.querySelector('[data-file-input]');
+        const label = document.querySelector('[data-file-label]');
+        const button = document.querySelector('[data-analyze-btn]');
+
+        function sync() {
+          if (!input) return;
+          const hasFile = input.files && input.files.length > 0;
+          if (label) label.textContent = hasFile ? input.files[0].name : 'Click to upload your selfie';
+          if (button) button.disabled = !hasFile;
+        }
+
+        if (input) {
+          input.addEventListener('change', sync);
+          sync();
+        }
+      })();
+    </script>
   </body>
 </html>

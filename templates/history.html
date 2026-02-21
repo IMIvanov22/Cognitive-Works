@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}SkinCare AI — Analysis History{% endblock %}
+
+{% block content %}
+<section class="page">
+  <div class="container">
+    <div class="page__header">
+      <div>
+        <h1 class="h1">Analysis History</h1>
+        <p class="muted">View your past skin analyses and personalized product recommendations</p>
+      </div>
+      <a class="nav__link" href="{{ url_for('home') }}">Home</a>
+    </div>
+
+    <div class="card card--pad card--large">
+      {% if not items %}
+        <div class="empty">
+          <div class="empty__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="46" height="46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2l1.2 5.2L18 8.5l-4.2 2.6L12 17l-1.8-5.9L6 8.5l4.8-1.3L12 2z" fill="currentColor" opacity="0.25"/>
+              <path d="M19.5 12.5l.6 2.4 2.4.6-2.4.6-.6 2.4-.6-2.4-2.4-.6 2.4-.6.6-2.4z" fill="currentColor" opacity="0.25"/>
+            </svg>
+          </div>
+          <div class="empty__title">No Analyses Yet</div>
+          <div class="muted">Upload a selfie on the home page to get your first skin analysis</div>
+          <div>
+            <a class="btn btn--primary" href="{{ url_for('home') }}">Get Started</a>
+          </div>
+        </div>
+      {% else %}
+        <div class="history">
+          {% for item in items %}
+            <div class="history__row">
+              <div class="history__thumb">
+                <img class="history__img" src="{{ item.image_url }}" alt="Uploaded selfie" />
+              </div>
+              <div class="history__meta">
+                <div class="history__title">Skin Type: {{ item.result.skin_type }}</div>
+                <div class="muted small">{{ item.created_at }}</div>
+                <div class="muted">{{ item.result.notes }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
