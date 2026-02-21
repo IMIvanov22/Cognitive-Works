@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS anemia;
+CREATE USER IF NOT EXISTS 'anemia'@'localhost'
+  IDENTIFIED BY 'anemia';
+GRANT ALL PRIVILEGES ON anemia.* TO 'anemia'@'localhost';
+FLUSH PRIVILEGES;
