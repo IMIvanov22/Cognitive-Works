@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% set active_page = 'diagnosis' %}
+
+{% block title %}AnemiaCare{% endblock %}
+
+{% block content %}
+<section class="hero" id="diagnosis">
+  <div class="container hero__inner">
+    <div class="hero__icon" aria-hidden="true">
+      <svg viewBox="0 0 48 48" width="42" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 26h10l5-12 6 20 4-8h11" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <h1 class="hero__title">Anemia Diagnosis Tool</h1>
+    <p class="hero__subtitle">Upload an image for an initial anemia screening</p>
+    <p class="hero__note">*This tool is for educational purposes only and does not replace professional medical advice</p>
+
+    <div class="card">
+      <div class="card__header">
+        <h2 class="card__title">Upload Image</h2>
+        <p class="card__hint">Choose a clear image (JPG/PNG/WebP). Avoid blur and low light.</p>
+      </div>
+
+      <form id="imageForm" class="form" method="post" action="{{ url_for('results') }}" enctype="multipart/form-data" novalidate>
+        <div class="form__grid form__grid--single">
+          <div class="field field--full">
+            <label class="field__label" for="image">Image <span class="req">*</span></label>
+            <input class="field__input" id="image" name="image" type="file" accept="image/*" required />
+            <p class="field__help" id="imageHelp">Supported: .jpg, .jpeg, .png, .webp</p>
+          </div>
+
+          <div class="field field--full" id="imagePreviewWrap" hidden>
+            <div class="preview">
+              <img id="imagePreview" class="preview__img" alt="Selected image preview" />
+            </div>
+            <p class="preview__meta" id="imageMeta"></p>
+          </div>
+        </div>
+
+        <div class="form__footer">
+          <a class="btn btn--ghost" href="{{ url_for('home') }}">Clear</a>
+          <button class="btn btn--primary" type="submit">Analyze</button>
+        </div>
+
+        <p class="form__error" id="formError" role="alert" aria-live="polite">{{ form_error or '' }}</p>
+      </form>
+    </div>
+
+    <section id="about" class="about">
+      <div class="about__inner">
+        <h2 class="about__title">About</h2>
+        <p class="about__text">AnemiaCare is a simple educational screening UI that accepts an image upload. It is not a medical device.</p>
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+  <script defer src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

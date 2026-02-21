@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Register • AnemiaCare{% endblock %}
+
+{% block content %}
+<section class="hero hero--auth">
+  <div class="container hero__inner">
+    <div class="hero__icon" aria-hidden="true">
+      <svg viewBox="0 0 48 48" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 26h10l5-12 6 20 4-8h11" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+
+    <h1 class="hero__title">Create Account</h1>
+    <p class="hero__subtitle">Join us to access anemia screening tools</p>
+
+    <div class="card card--auth">
+      <div class="card__header">
+        <p class="card__title">Register</p>
+        <p class="card__hint">Enter your information to create your account</p>
+      </div>
+
+      <form class="authForm" action="#" method="post" autocomplete="on">
+        <div class="field">
+          <label class="field__label" for="username">Username <span class="req">*</span></label>
+          <input class="field__input" id="username" name="username" type="text" placeholder="johndoe" autocomplete="username" required />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="password">Password <span class="req">*</span></label>
+          <input class="field__input" id="password" name="password" type="password" placeholder="••••••••" autocomplete="new-password" required />
+        </div>
+
+        <button class="btn btn--primary btn--block" type="submit">Create Account</button>
+
+        <p class="authNote">Already have an account? <a class="link" href="{{ url_for('login') }}">Sign in</a></p>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

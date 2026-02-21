@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% set active_page = 'diagnosis' %}
+
+{% block title %}Results • AnemiaCare{% endblock %}
+
+{% block content %}
+<section class="hero" id="diagnosis">
+  <div class="container hero__inner">
+    <div class="hero__icon" aria-hidden="true">
+      <svg viewBox="0 0 48 48" width="42" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 26h10l5-12 6 20 4-8h11" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+
+    <h1 class="hero__title">Anemia Diagnosis Tool</h1>
+    <p class="hero__subtitle">Upload an image for an initial anemia screening</p>
+    <p class="hero__note">*This tool is for educational purposes only and does not replace professional medical advice</p>
+
+    <div class="card">
+      <div class="result">
+        <div class="result__header">
+          <span class="result__statusIcon {{ 'result__statusIcon--danger' if result.kind == 'danger' else 'result__statusIcon--success' }}" aria-hidden="true">
+            {{ '!' if result.kind == 'danger' else '✓' }}
+          </span>
+          <h2 class="result__title">Diagnosis Result</h2>
+        </div>
+
+        <div class="result__banner {{ 'banner--danger' if result.kind == 'danger' else 'banner--success' }}">
+          <div class="result__bannerTitle">{{ result.title }}</div>
+          <div class="result__bannerText">{{ result.text }}</div>
+        </div>
+
+        <h3 class="result__subtitle">Recommendations:</h3>
+        <ul class="result__list">
+          {% for item in result.recommendations %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+
+        <div class="result__important">
+          <strong>Important:</strong>
+          This tool provides preliminary screening only. Always consult a qualified healthcare provider for proper diagnosis and treatment.
+          Do not use this tool as a substitute for professional medical advice.
+        </div>
+
+        <div class="result__footer">
+          <a class="btn btn--primary" href="{{ url_for('home') }}">New Diagnosis</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
