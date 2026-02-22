@@ -14,8 +14,8 @@
 
       <div class="card card--pad">
         <div class="card__title">Try It Now</div>
-        <form class="upload" action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data">
-          <label class="dropzone" for="selfie">
+        <form class="upload" action="{{ url_for('home') }}" method="post" enctype="multipart/form-data">
+          <label class="dropzone" for="image">
             <div class="dropzone__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -27,8 +27,8 @@
             <div class="dropzone__meta">PNG, JPG up to 10MB</div>
           </label>
           <input
-            id="selfie"
-            name="selfie"
+            id="image"
+            name="image"
             type="file"
             accept="image/png,image/jpeg"
             class="sr-only"
@@ -42,8 +42,8 @@
       </div>
 
       <div class="hero__actions">
-        <a class="btn btn--soft" href="{{ url_for('register') }}">Create Account</a>
-        <a class="btn btn--ghost" href="{{ url_for('login') }}">Sign In</a>
+        <a class="btn btn--soft no_account" href="{{ url_for('register') }}">Create Account</a>
+        <a class="btn btn--ghost no_account" href="{{ url_for('login') }}">Sign In</a>
       </div>
     </div>
 
@@ -124,7 +124,7 @@
   </div>
 </section>
 
-<section class="section section--cta">
+<section class="section section--cta no_account">
   <div class="container cta">
     <h2 class="h2 center">Ready to Transform Your Skin?</h2>
     <p class="center muted">Join thousands of users who have discovered their perfect skincare routine.</p>

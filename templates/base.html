@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% block title %}SkinCare AI{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <script src="{{ url_for('static', filename='js/api.js') }}" defer></script>
+    {% block head %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/base.js') }}" defer></script>
   </head>
   <body>
     <header class="topbar">
@@ -20,9 +23,10 @@
         </a>
 
         <nav class="nav">
-          <a class="nav__link" href="{{ url_for('history') }}">My History</a>
-          <a class="nav__link" href="{{ url_for('login') }}">Login</a>
-          <a class="btn btn--primary" href="{{ url_for('register') }}">Get Started</a>
+          <a class="nav__link account" style="display: none;" href="{{ url_for('history') }}">My History</a>
+          <a class="nav__link no_account" href="{{ url_for('login') }}">Login</a>
+          <a class="btn btn--primary no_account" href="{{ url_for('register') }}">Get Started</a>
+          <a class="btn btn--primary account" style="display: none;" href="{{ url_for('home') }}">Log out</a>
         </nav>
       </div>
     </header>

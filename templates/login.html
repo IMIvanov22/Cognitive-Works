@@ -2,6 +2,8 @@
 
 {% block title %}SkinCare AI — Login{% endblock %}
 
+{% block head %}<script src="{{ url_for('static', filename='js/login.js') }}"></script>{% endblock %}
+
 {% block content %}
 <section class="auth">
   <div class="container auth__grid">
@@ -51,6 +53,7 @@
 
         <button class="btn btn--primary btn--full" type="submit">Sign In</button>
 
+        <div class="center muted small" id="warning" style="display: none"></div>
         <div class="center muted small">
           Don't have an account?
           <a class="link" href="{{ url_for('register') }}">Create one</a>

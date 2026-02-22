@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}SkinCare AI — Analysis History{% endblock %}
-
+{% block head %}<script src="{{ url_for('static', filename='js/history.js') }}" defer></script>{% endblock %}
 {% block content %}
 <section class="page">
   <div class="container">
@@ -13,9 +13,23 @@
       <a class="nav__link" href="{{ url_for('home') }}">Home</a>
     </div>
 
-    <div class="card card--pad card--large">
-      {% if not items %}
-        <div class="empty">
+    <div class="card card--pad card--large" id="history_container">
+
+      <div class="empty" id = "no_account" style = "display: none">
+          <div class="empty__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="46" height="46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2l1.2 5.2L18 8.5l-4.2 2.6L12 17l-1.8-5.9L6 8.5l4.8-1.3L12 2z" fill="currentColor" opacity="0.25"/>
+              <path d="M19.5 12.5l.6 2.4 2.4.6-2.4.6-.6 2.4-.6-2.4-2.4-.6 2.4-.6.6-2.4z" fill="currentColor" opacity="0.25"/>
+            </svg>
+          </div>
+          <div class="empty__title">No account</div>
+          <div class="muted">Click here to create an account</div>
+          <div>
+            <a class="btn btn--primary" href="{{ url_for('register') }}">Sign up</a>
+          </div>
+        </div>
+
+      <div class="empty" id = "no_history" style = "display: none">
           <div class="empty__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="46" height="46" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2l1.2 5.2L18 8.5l-4.2 2.6L12 17l-1.8-5.9L6 8.5l4.8-1.3L12 2z" fill="currentColor" opacity="0.25"/>
@@ -28,22 +42,10 @@
             <a class="btn btn--primary" href="{{ url_for('home') }}">Get Started</a>
           </div>
         </div>
-      {% else %}
-        <div class="history">
-          {% for item in items %}
-            <div class="history__row">
-              <div class="history__thumb">
-                <img class="history__img" src="{{ item.image_url }}" alt="Uploaded selfie" />
-              </div>
-              <div class="history__meta">
-                <div class="history__title">Skin Type: {{ item.result.skin_type }}</div>
-                <div class="muted small">{{ item.created_at }}</div>
-                <div class="muted">{{ item.result.notes }}</div>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
+
+      <div class="history" id = "history" style = "display: none">
+
+      </div>
     </div>
   </div>
 </section>
