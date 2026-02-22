@@ -1,19 +1,17 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/logo1.png" width="720">
+  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/logo1.png" width="1150">
 </p>
 
 <hr>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/Flask.png" width="48">
-  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/MySQL.png" width="48">
-  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/NumPay.png" width="48">
-  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/pycharm.png" width="48">
-  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/python.png" width="48">
-  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/tensorflow.png" width="48">
+  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/Flask.png" width="90">
+  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/MySQL.png" width="90">
+  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/NumPay.png" width="90">
+  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/pycharm.png" width="90">
+  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/python.png" width="90">
+  <img src="https://raw.githubusercontent.com/IMIvanov22/Cognitive-Works/refs/heads/main/images/tensorflow.png" width="90">
 </p>
-
-
 <br>
 
 # 📄 Documentation
