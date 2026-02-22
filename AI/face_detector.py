@@ -12,12 +12,13 @@ AGE_GROUP_LABELS = {
     1: "Early aging (19–45)",
     2: "Mature skin (46+)",
 }
+ACNE_SEVERITY_LABELS = {
+    0: "Low (0-1)",
+    1: "High (2-3)",
+}
 
 
 class FacePredictor:
-    """Predicts age, gender, and race from a face image using ResNet50
-    embeddings and XGBoost models trained on the UTKFace dataset."""
-
     def __init__(self):
         base_dir = os.path.dirname(__file__)
 
@@ -25,6 +26,8 @@ class FacePredictor:
             self.age_model = pickle.load(f)
         with open(os.path.join(base_dir, "gender_classifier_model.pkl"), "rb") as f:
             self.gender_model = pickle.load(f)
+        with open(os.path.join(base_dir, "acne_classifier_model.pkl"), "rb") as f:
+            self.acne_model = pickle.load(f)
 
         self._ResNet = ResNet50(
             weights="imagenet",
@@ -35,7 +38,6 @@ class FacePredictor:
         self._ResNet.trainable = False
 
     def _extract_embedding(self, img):
-        """Extract a ResNet50 embedding from a PIL Image."""
         img = img.resize((224, 224))
         img = img_to_array(img)
         img = np.expand_dims(img, axis=0)
@@ -48,10 +50,13 @@ class FacePredictor:
 
         age_group_id = int(self.age_model.predict(emb)[0])
         gender_id = int(self.gender_model.predict(emb)[0])
+        acne_severity_id = int(self.acne_model.predict(emb)[0])
 
         return {
             "age_group": AGE_GROUP_LABELS.get(age_group_id, str(age_group_id)),
             "age_group_id": age_group_id,
             "gender": GENDER_LABELS[gender_id],
             "gender_id": gender_id,
+            "acne_severity": ACNE_SEVERITY_LABELS.get(acne_severity_id, str(acne_severity_id)),
+            "acne_severity_id": acne_severity_id,
         }

@@ -10,7 +10,8 @@ window.api = {
         });
 
         if (r.status !== 200) {
-            throw Error("Serverside error");
+            const body = await r.json().catch(() => ({}));
+            throw Error(body.error || "Serverside error");
         }
 
         const responseBody = await r.json();
@@ -28,7 +29,8 @@ window.api = {
         });
 
         if (r.status !== 200) {
-            throw Error("Serverside error");
+            const body = await r.json().catch(() => ({}));
+            throw Error(body.error || "Serverside error");
         }
 
         const responseBody = await r.json();
@@ -64,11 +66,12 @@ window.api = {
         });
 
         if (r.status !== 200) {
-            return null;
+            const body = await r.json().catch(() => ({}));
+            throw Error(body.error || "Analysis failed");
         }
 
         const responseBody = await r.json();
-        return responseBody.id;
+        return responseBody.predictions;
     },
 
     async history(token){
@@ -85,5 +88,29 @@ window.api = {
 
         const responseBody = await r.json();
         return responseBody.history;
+    },
+
+    async logout(token) {
+        const r = await fetch("/api/logout", {
+            method: "POST",
+            headers: {
+                "token": token
+            }
+        });
+        return r.status === 200;
     }
 };
+
+// Load current user state (runs before other deferred scripts)
+window.userLoaded = (async function() {
+    window.username = null;
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    try {
+        const username = await window.api.self(token);
+        window.username = username || null;
+    } catch (err) {
+        console.error("Failed to load user:", err);
+        window.username = null;
+    }
+})();

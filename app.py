@@ -1,8 +1,18 @@
 from flask import Flask, render_template, request, jsonify
 from DB.database import Database
+from AI.anemia_detector import FacePredictor
+from PIL import Image
 
 app = Flask(__name__)
+app.secret_key = 'skincare-secret-key'
 db = Database(app, wipeDB= True, backend='sqlite')
+
+predictor = None
+def get_predictor():
+    global predictor
+    if predictor is None:
+        predictor = FacePredictor()
+    return predictor
 
 @app.route('/')
 def home():
@@ -21,11 +31,14 @@ def history():
 def api_register():
     username = request.form.get('username')
     password = request.form.get('password')
-    print(username, password)
 
     if not username or not password:
         return jsonify({"error": "Missing username or password"}), 400
 
+    if db.user_exists(username):
+        return jsonify({"error": "Username already taken"}), 409
+
+    db.create_user(username, password)
 
     return jsonify({"message": "account created successfully"}), 200
 
@@ -37,8 +50,13 @@ def api_login():
     if not username or not password:
         return jsonify({"error": "Missing username or password"}), 400
 
+    if not db.user_exists(username):
+        return jsonify({"error": "Invalid credentials"}), 401
 
-    token = "example_token"
+    if not db.verify_user(username, password):
+        return jsonify({"error": "Invalid credentials"}), 401
+
+    token = db.create_token(username)
 
     return jsonify({"token": token}), 200
 
@@ -49,8 +67,10 @@ def api_self():
     if not token:
         return jsonify(), 401
 
+    username = db.get_user(token)
 
-    username = "example_user"
+    if not username:
+        return jsonify(), 401
 
     return jsonify({"username": username}), 200
 
@@ -62,14 +82,23 @@ def api_analyze():
     if not token:
         return jsonify({"error": "Missing token"}), 401
 
+    username = db.get_user(token)
+    if not username:
+        return jsonify({"error": "Invalid token"}), 401
+
     if not image:
         return jsonify({"error": "No image uploaded"}), 400
 
+    try:
+        img = Image.open(image.stream).convert("RGB")
+        fp = get_predictor()
+        predictions = fp.predict(img)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
+    db.create_analysis(username, predictions["age_group_id"])
 
-    analysis_id = "12345"
-
-    return jsonify({"id": analysis_id}), 200
+    return jsonify({"predictions": predictions}), 200
 
 @app.route('/api/history', methods=['POST'])
 def api_history():
@@ -78,11 +107,28 @@ def api_history():
     if not token:
         return jsonify({"error": "Missing token"}), 401
 
-    history = [
-        {"id": "12345", "result": "example"}
-    ]
+    username = db.get_user(token)
+    if not username:
+        return jsonify({"error": "Invalid token"}), 401
 
-    return jsonify({"history": history}), 200
+    analyses = db.get_analyses(username)
+
+    return jsonify({"history": analyses}), 200
+
+@app.route('/api/logout', methods=['POST'])
+def api_logout():
+    token = request.headers.get('token')
+
+    if not token:
+        return jsonify({"error": "Missing token"}), 401
+
+    username = db.get_user(token)
+    if not username:
+        return jsonify({"error": "Invalid token"}), 401
+
+    db.delete_tokens(username)
+
+    return jsonify({"message": "logged out"}), 200
 
 if __name__ == '__main__':
     app.run()

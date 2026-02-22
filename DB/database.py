@@ -1,3 +1,4 @@
+import secrets
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -83,7 +84,7 @@ class Database:
         token = self.TokenModel()
         token.userId = user.userId
 
-        token.token = generate_password_hash(user.password + self.db.func.current_timestamp() + user.username)
+        token.token = secrets.token_hex(64)
 
         self.db.session.add(token)
         self.db.session.commit()
@@ -97,13 +98,17 @@ class Database:
         return False
 
     def get_user(self, token):
-        token = self.TokenModel.query.filter_by(token = token).first()
-        return token.token
+        token_row = self.TokenModel.query.filter_by(token = token).first()
+        if not token_row:
+            return None
+        user = self.UserModel.query.filter_by(userId = token_row.userId).first()
+        return user.username if user else None
 
     def delete_tokens(self, username):
         user = self.UserModel.query.filter_by(username = username).first()
 
         self.TokenModel.query.filter_by(userId = user.userId).delete()
+        self.db.session.commit()
 
 
 
@@ -119,7 +124,7 @@ class Database:
 
     def get_analyses(self, username):
         user = self.UserModel.query.filter_by(username = username).first()
-        analyses = self.AnalysesModel.query.with_entities(self.AnalysesModel.createdAt, self.AnalysesModel.status).filter_by(userId = user.userId).all()
+        analyses = self.AnalysesModel.query.with_entities(self.AnalysesModel.createdAt, self.AnalysesModel.skinType).filter_by(userId = user.userId).all()
         return [{'timestamp': analysis[0].timestamp(),
                  'skinType': analysis[1]}
                 for analysis in analyses]

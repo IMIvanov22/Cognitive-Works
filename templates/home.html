@@ -2,6 +2,8 @@
 
 {% block title %}SkinCare AI — Home{% endblock %}
 
+{% block head %}<script src="{{ url_for('static', filename='js/home.js') }}" defer></script>{% endblock %}
+
 {% block content %}
 <section class="hero">
   <div class="container hero__grid">
@@ -55,6 +57,14 @@
           alt="Skincare lifestyle photo placeholder"
         />
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="results-section" style="display: none;">
+  <div class="container">
+    <h2 class="h2 center">Your Results</h2>
+    <div class="card card--pad" id="results-card">
     </div>
   </div>
 </section>
