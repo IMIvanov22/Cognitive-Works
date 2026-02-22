@@ -71,7 +71,7 @@ window.api = {
         }
 
         const responseBody = await r.json();
-        return responseBody.predictions;
+        return responseBody;
     },
 
     async history(token){
@@ -101,7 +101,6 @@ window.api = {
     }
 };
 
-// Load current user state (runs before other deferred scripts)
 window.userLoaded = (async function() {
     window.username = null;
     const token = localStorage.getItem("token");

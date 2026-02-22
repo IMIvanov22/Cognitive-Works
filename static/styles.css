@@ -152,11 +152,19 @@ a{color:inherit}
 .empty__title{font-size:22px;font-weight:900}
 
 .history{display:flex;flex-direction:column;gap:14px}
-.history__row{display:flex;gap:14px;align-items:center;padding:12px;border-radius:14px;border:1px solid var(--stroke);background:#fff}
+.history__row{display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:14px;border:1px solid var(--stroke);background:#fff}
 .history__thumb{width:92px;height:68px;border-radius:12px;overflow:hidden;border:1px solid var(--stroke);background:#fafafa;flex:0 0 auto}
 .history__img{width:100%;height:100%;object-fit:cover;display:block}
 .history__title{font-weight:900}
 .history__meta{display:flex;flex-direction:column;gap:4px}
+.history__recs{margin-top:4px;padding-top:8px;border-top:1px solid var(--stroke)}
+.history__recs-title{font-weight:700;font-size:13px;margin-bottom:6px;color:#555}
+.history__recs-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px}
+.history__rec-item{font-size:13px;display:flex;align-items:center;gap:8px;padding:4px 0}
+.rec-product{font-weight:600}
+.rec-brand{color:#888;font-size:12px}
+.badge{font-size:11px;padding:2px 8px;border-radius:8px;font-weight:600}
+.badge--acne{background:#e0f5e9;color:#1a7a42}
 
 .auth{padding:46px 0}
 .auth__grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
@@ -178,6 +186,11 @@ a{color:inherit}
 .link:hover{text-decoration:underline}
 
 .divider{height:1px;background:var(--stroke);margin:14px 0}
+
+.rec-table{width:100%;border-collapse:collapse;margin-top:.75rem;font-size:.95rem}
+.rec-table th,.rec-table td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--stroke)}
+.rec-table th{font-weight:600;color:var(--muted);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+.rec-table tbody tr:hover{background:var(--bg2)}
 
 @media (max-width: 980px){
   .hero__grid{grid-template-columns:1fr;}

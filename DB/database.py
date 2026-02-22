@@ -41,10 +41,21 @@ class Database:
 
             token = self.db.Column(self.db.String(512), unique=True, nullable=False)
 
+        class RecommendationModel(self.db.Model):
+            __tablename__ = 'recommendations'
+            recommendationId = self.db.Column(self.db.Integer, primary_key=True)
+            analysisId = self.db.Column(self.db.Integer, self.db.ForeignKey('analyses.analysisId', ondelete='CASCADE'), nullable=False)
+
+            productName = self.db.Column(self.db.String(256), nullable=False)
+            brand = self.db.Column(self.db.String(256), nullable=False)
+            goodForAcne = self.db.Column(self.db.Boolean, nullable=False)
+
+        AnalysesModel.recommendations = self.db.relationship('RecommendationModel', backref='analysis', cascade='all, delete-orphan')
 
         self.UserModel = UserModel
         self.AnalysesModel = AnalysesModel
         self.TokenModel = TokenModel
+        self.RecommendationModel = RecommendationModel
 
         with self.app.app_context():
             if wipeDB:
@@ -112,7 +123,7 @@ class Database:
 
 
 
-    def create_analysis(self, username, skinType):
+    def create_analysis(self, username, skinType, recommendations=None):
         user = self.UserModel.query.filter_by(username = username).first()
         analysis = self.AnalysesModel()
 
@@ -120,11 +131,27 @@ class Database:
         analysis.skinType = skinType
 
         self.db.session.add(analysis)
+        self.db.session.flush()
+
+        if recommendations:
+            for rec in recommendations:
+                r = self.RecommendationModel()
+                r.analysisId = analysis.analysisId
+                r.productName = rec['product_name']
+                r.brand = rec['brand']
+                r.goodForAcne = rec['good_for_acne']
+                self.db.session.add(r)
+
         self.db.session.commit()
 
     def get_analyses(self, username):
         user = self.UserModel.query.filter_by(username = username).first()
-        analyses = self.AnalysesModel.query.with_entities(self.AnalysesModel.createdAt, self.AnalysesModel.skinType).filter_by(userId = user.userId).all()
-        return [{'timestamp': analysis[0].timestamp(),
-                 'skinType': analysis[1]}
+        analyses = self.AnalysesModel.query.filter_by(userId = user.userId).order_by(self.AnalysesModel.createdAt.desc()).all()
+        return [{'timestamp': analysis.createdAt.timestamp(),
+                 'skinType': analysis.skinType,
+                 'recommendations': [{
+                     'product_name': r.productName,
+                     'brand': r.brand,
+                     'good_for_acne': r.goodForAcne
+                 } for r in analysis.recommendations]}
                 for analysis in analyses]

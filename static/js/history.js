@@ -37,12 +37,25 @@ async function loadHistory() {
                 const skinType = historyData[i].skinType;
                 const timestamp = new Date(historyData[i].timestamp * 1000).toLocaleString();
                 const ageLabel = AGE_LABELS[skinType] || "Unknown";
+                const recs = historyData[i].recommendations || [];
+
+                let recsHtml = '';
+                if (recs.length > 0) {
+                    recsHtml = '<div class="history__recs"><div class="history__recs-title">Recommended Products</div><ul class="history__recs-list">';
+                    for (const r of recs) {
+                        const acneBadge = r.good_for_acne ? '<span class="badge badge--acne">Acne-friendly</span>' : '';
+                        recsHtml += `<li class="history__rec-item"><span class="rec-product">${r.product_name}</span> <span class="rec-brand">${r.brand}</span> ${acneBadge}</li>`;
+                    }
+                    recsHtml += '</ul></div>';
+                }
+
                 html += `
                     <div class="history__row">
                       <div class="history__meta">
                         <div class="history__title">Age Group: ${ageLabel}</div>
                         <div class="muted small">${timestamp}</div>
                       </div>
+                      ${recsHtml}
                     </div>
                 `;
             }
