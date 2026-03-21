@@ -1,62 +1,86 @@
-import pickle
 import os
+import pickle
+from pathlib import Path
+
 import numpy as np
-from tensorflow.keras.utils import img_to_array
-from tensorflow.keras.applications.resnet50 import preprocess_input
-from tensorflow.keras.applications import ResNet50
+import tensorflow as tf
+
+keras = tf.keras
 
 GENDER_LABELS = {0: "Male", 1: "Female"}
-RACE_LABELS = {0: "White", 1: "Black", 2: "Asian", 3: "Indian", 4: "Other"}
 AGE_GROUP_LABELS = {
     0: "Young skin (0–18)",
     1: "Early aging (19–45)",
     2: "Mature skin (46+)",
 }
-ACNE_SEVERITY_LABELS = {
-    0: "Low (0-1)",
-    1: "High (2-3)",
-}
 
+SKIN_LABELS = ["redness", "acne", "pigmentation", "wrinkles", "normal_skin"]
 
 class FacePredictor:
-    def __init__(self):
-        base_dir = os.path.dirname(__file__)
+    def __init__(
+        self,
+        *,
+        skin_model_path=None,
+        skin_img_size=(224, 224),
+    ):
+        base_dir = Path(__file__).resolve().parent
 
-        with open(os.path.join(base_dir, "age_classifier_model.pkl"), "rb") as f:
-            self.age_model = pickle.load(f)
-        with open(os.path.join(base_dir, "gender_classifier_model.pkl"), "rb") as f:
-            self.gender_model = pickle.load(f)
-        with open(os.path.join(base_dir, "acne_classifier_model.pkl"), "rb") as f:
-            self.acne_model = pickle.load(f)
+        age_path = base_dir / "age_classifier_model.pkl"
+        gender_path = base_dir / "gender_classifier_model.pkl"
+        self.age_model = None
+        self.gender_model = None
+        if age_path.exists():
+            with age_path.open("rb") as f:
+                self.age_model = pickle.load(f)
+        if gender_path.exists():
+            with gender_path.open("rb") as f:
+                self.gender_model = pickle.load(f)
 
-        self._ResNet = ResNet50(
+        self.skin_img_size = skin_img_size
+
+        if skin_model_path is None:
+            skin_model_path = base_dir / "resnet50_5labels.keras"
+        self.skin_model_path = Path(skin_model_path)
+
+        self.skin_model = keras.models.load_model(self.skin_model_path)
+
+        self._resnet_embedder = keras.applications.ResNet50(
             weights="imagenet",
             include_top=False,
             pooling="avg",
             input_shape=(224, 224, 3),
         )
-        self._ResNet.trainable = False
+        self._resnet_embedder.trainable = False
 
     def _extract_embedding(self, img):
-        img = img.resize((224, 224))
-        img = img_to_array(img)
-        img = np.expand_dims(img, axis=0)
-        img = preprocess_input(img)
-        emb = self._ResNet(img, training=False).numpy()[0]
+        preprocess_input = keras.applications.resnet50.preprocess_input
+        arr = keras.utils.img_to_array(img.resize((224, 224)))
+        arr = np.expand_dims(arr, axis=0)
+        arr = preprocess_input(arr)
+        emb = self._resnet_embedder(arr, training=False).numpy()[0]
         return emb
 
-    def predict(self, img):
-        emb = self._extract_embedding(img).reshape(1, -1)
+    def _prepare_skin_input(self, img):
+        preprocess_input = keras.applications.resnet50.preprocess_input
 
+        resized = img.resize(self.skin_img_size)
+        arr = keras.utils.img_to_array(resized).astype(np.float32)
+        arr = preprocess_input(arr)
+        arr = np.expand_dims(arr, axis=0)
+        return arr
+
+    def predict(self, img):
+        x = self._prepare_skin_input(img)
+        probs = self.skin_model.predict(x, verbose=0)[0]
+        return np.asarray(probs, dtype=np.float32)
+
+    def predict_demographics(self, img):
+        emb = self._extract_embedding(img).reshape(1, -1)
         age_group_id = int(self.age_model.predict(emb)[0])
         gender_id = int(self.gender_model.predict(emb)[0])
-        acne_severity_id = int(self.acne_model.predict(emb)[0])
-
         return {
             "age_group": AGE_GROUP_LABELS.get(age_group_id, str(age_group_id)),
             "age_group_id": age_group_id,
-            "gender": GENDER_LABELS[gender_id],
+            "gender": GENDER_LABELS.get(gender_id, str(gender_id)),
             "gender_id": gender_id,
-            "acne_severity": ACNE_SEVERITY_LABELS.get(acne_severity_id, str(acne_severity_id)),
-            "acne_severity_id": acne_severity_id,
         }

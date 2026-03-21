@@ -27,6 +27,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const recommendations = data.recommendations || [];
                 const resultsSection = document.getElementById('results-section');
                 const resultsCard = document.getElementById('results-card');
+                const picked = predictions.picked || [];
+
+                const pickedHTML = `
+                    <div class="card__title" style="margin-top:1rem;">Skin Conditions</div>
+                    <p><strong>Picked:</strong> ${picked.join(', ') || '—'}</p>
+                `;
 
                 let recHTML = '';
                 if (recommendations.length > 0) {
@@ -34,7 +40,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <div class="card__title" style="margin-top:1.5rem;">Recommended Products</div>
                         <table class="rec-table">
                             <thead>
-                                <tr><th>Product</th><th>Brand</th><th>Good for Acne</th></tr>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Brand</th>
+                                    <th>Good for Acne</th>
+                                    <th>Good for Redness</th>
+                                    <th>Good for Pigmentation</th>
+                                    <th>Good for Wrinkles</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 ${recommendations.map(r => `
@@ -42,6 +55,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                                         <td>${r.product_name}</td>
                                         <td>${r.brand}</td>
                                         <td>${r.good_for_acne ? 'Yes' : 'No'}</td>
+                                        <td>${r.good_for_redness ? 'Yes' : 'No'}</td>
+                                        <td>${r.good_for_pigmentation ? 'Yes' : 'No'}</td>
+                                        <td>${r.good_for_wrinkles ? 'Yes' : 'No'}</td>
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -53,9 +69,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 resultsCard.innerHTML = `
                     <div class="card__title">AI Predictions</div>
-                    <p><strong>Age Group:</strong> ${predictions.age_group}</p>
-                    <p><strong>Gender:</strong> ${predictions.gender}</p>
-                    <p><strong>Acne Severity:</strong> ${predictions.acne_severity}</p>
+                    ${predictions.age_group ? `<p><strong>Age Group:</strong> ${predictions.age_group}</p>` : ''}
+                    ${predictions.gender ? `<p><strong>Gender:</strong> ${predictions.gender}</p>` : ''}
+                    ${pickedHTML}
                     ${recHTML}
                 `;
                 resultsSection.style.display = '';

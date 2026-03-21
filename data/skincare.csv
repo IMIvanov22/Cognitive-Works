@@ -1,92 +1,31 @@
-product_name,brand,good_for_acne,gender,age_group
-CeraVe Foaming Facial Cleanser,CeraVe,1,male,1
-CeraVe Moisturizing Cream,CeraVe,0,female,2
-La Roche‑Posay Effaclar Duo+,La Roche‑Posay,1,female,1
-Neutrogena Oil‑Free Acne Wash,Neutrogena,1,male,1
-Paula’s Choice Skin Perfecting 2% BHA,Paula’s Choice,1,female,1
-The Ordinary Niacinamide 10% + Zinc 1%,The Ordinary,1,female,1
-Aveeno Calm + Restore,Oat Gel Cleanser,Aveeno,0,female,1
-Differin Adapalene Gel 0.1%,Differin,1,male,1
-Bioderma Sensibio H2O,Bioderma,0,female,1
-Kiehl’s Ultra Facial Cream,Kiehl’s,0,male,2
-Neutrogena Hydro Boost Water Gel,Neutrogena,0,female,1
-Clinique Dramatically Different Moisturizing Lotion+,Clinique,0,female,1
-The Body Shop Tea Tree Oil,The Body Shop,1,female,1
-La Roche‑Posay Toleriane Hydrating Gentle Cleanser,La Roche‑Posay,0,female,2
-Eucerin Advanced Repair Lotion,Eucerin,0,male,2
-Murad Acne Control Clarifying Cleanser,Murad,1,female,1
-COSRX Advanced Snail 96 Mucin Essence,COSRX,0,female,1
-Mario Badescu Drying Lotion,Mario Badescu,1,female,1
-EltaMD UV Clear SPF 46,EltaMD,1,female,1
-Olay Regenerist Micro‑Sculpting Cream,Olay,0,female,2
-Cetaphil Gentle Skin Cleanser,Cetaphil,0,male,1
-Tatcha The Water Cream,Tatcha,0,female,1
-Youth To The People Superfood Antioxidant Cleanser,Youth To The People,0,female,1
-First Aid Beauty Ultra Repair Cream,First Aid Beauty,0,female,2
-The Inkey List Alpha‑Arbutin Serum,The Inkey List,0,female,1
-Drunk Elephant T.L.C. Framboos Glycolic Night Serum,Drunk Elephant,1,female,1
-Paula’s Choice Resist Anti‑Aging Clear Skin Hydrator,Paula’s Choice,0,female,2
-Kiehl’s Calendula Herbal Extract Toner,Kiehl’s,0,female,1
-Origins GinZing Oil‑Free Energy‑Boosting Gel Moisturizer,Origins,0,male,1
-Vichy Normaderm PhytoAction Gel Cleanser,Vichy,1,male,1
-Shiseido Ultimune Power Infusing Concentrate,Shiseido,0,female,2
-GLAMGLOW Supermud Clearing Treatment,GLAMGLOW,1,female,1
-COSRX BHA Blackhead Power Liquid,COSRX,1,female,1
-Foreo Luna Mini 2 (Tool),Foreo,1,male,1
-Clinique Acne Solutions Clinical Clearing Gel,Clinique,1,female,1
-Aveeno Positively Radiant SPF 50,Isdin,0,female,1
-Sunday Riley Good Genes All‑In‑One Lactic Acid Treatment,Sunday Riley,1,female,1
-The Ordinary Retinol 0.2% in Squalane,The Ordinary,1,female,2
-La Roche‑Posay Anthelios Ultra SPF 50+,La Roche‑Posay,0,female,2
-Paula’s Choice Calm Redness Relief Cleanser,Paula’s Choice,0,female,1
-Dermalogica Special Cleansing Gel,Dermalogica,0,male,1
-Mario Badescu Glycolic Acid Toner,Mario Badescu,1,female,1
-CeraVe SA Smoothing Cleanser,CeraVe,1,male,1
-Bioderma Atoderm Ultra‑Nourishing Cleansing Gel,Bioderma,0,female,2
-Ole Henriksen Truth Serum Ole Henriksen,Ole Henriksen,0,female,1
-E.l.f. Acne Fighting Gel,E.l.f.,1,male,1
-Neutrogena Teens Oil‑Free Moisturizer,Neutrogena,1,female,0
-Clean & Clear Morning Burst Facial Cleanser,Clean & Clear,1,female,0
-Tosowoong Enzyme Powder Wash,Tosowoong,1,female,1
-COSRX Advanced Snail 92 All‑In‑One Cream,COSRX,0,female,1
-Paula’s Choice Clear Extra Strength,Paula’s Choice,1,female,1
-La Roche‑Posay Cicaplast Baume B5,La Roche‑Posay,0,male,2
-Clinique For Men Charcoal Face Wash,Clinique,1,male,1
-Olay Complete All Day Moisturizer SPF 15,Olay,0,female,1
-The Ordinary Hyaluronic Acid 2% + B5,The Ordinary,0,female,1
-Neutrogena Rapid Wrinkle Repair,Neutrogena,0,female,2
-Skinceuticals C E Ferulic,Skinceuticals,0,female,2
-PCA Skin Vitamin B3 Brightening Serum,PCA Skin,0,female,1
-Dermalogica Breakout Clearing Booster,Dermalogica,1,male,1
-Vichy Aqualia Thermal Rich Cream,Vichy,0,female,2
-First Aid Beauty Facial Radiance Pads,First Aid Beauty,1,female,1
-COSRX Oil‑Free Ultra‑Moisturizing Lotion,COSRX,0,female,1
-Murad Retinol Youth Renewal Serum,Murad,0,female,2
-Shiseido Benefiance Wrinkle Smoothing Cream,Shiseido,0,female,2
-Eucerin Q10 Anti‑Wrinkle Face Cream,Eucerin,0,female,2
-Neutrogena Bright Boost Gel Cream,Neutrogena,0,male,1
-La Roche‑Posay Lipikar Balm AP+M,La Roche‑Posay,0,female,2
-Olay Luminous Tone Perfecting Cream,Olay,0,female,2
-Bioderma Hydrabio Serum,Bioderma,0,female,1
-The Body Shop Vitamin E Moisture Cream,The Body Shop,0,female,1
-CeraVe Skin Renewing Night Cream,CeraVe,0,female,2
-Clinique For Men Moisturizing Balm,Clinique,0,male,1
-Neutrogena Clear Pore Cleanser/Mask,Neutrogena,1,female,1
-COSRX Acne Pimple Master Patch,COSRX,1,female,1
-Peter Thomas Roth 2% BHA Liquid,PTR,1,female,1
-Isdin Melatopic Cream,Isdin,0,female,2
-La Roche‑Posay Hyalu B5 Serum,La Roche‑Posay,0,female,1
-Paula’s Choice Resist Weightless Advanced Repair,Paula’s Choice,0,female,2
-Murad Environmental Shield Vitamin C, Murad,0,female,1
-Vichy LiftActiv Supreme, Vichy,0,female,2
-Clinique Pep‑Start 2‑In‑1 Exfoliating Cleanser,Clinique,1,male,1
-Olay Total Effects 7‑in‑1, Olay,0,female,2
-E.l.f. Daily Hydration Moisturizer, E.l.f.,0,female,1
-Neutrogena Blackhead Eliminating Daily Scrub,Neutrogena,1,male,1
-COSRX AHA/BHA Clarifying Treatment Toner,COSRX,1,female,1
-CeraVe Eye Repair Cream,CeraVe,0,female,2
-La Roche‑Posay Lipikar Syndet AP+,La Roche‑Posay,0,male,2
-Paula’s Choice Resist Barrier Repair Moisturizer,Paula’s Choice,0,female,2
-CeraVe Hydrating Facial Cleanser,CeraVe,0,male,0
-Cetaphil Daily Facial Cleanser,Cetaphil,0,male,0
-Neutrogena Hydro Boost Gel-Cream (Fragrance-Free),Neutrogena,0,male,0
+product_name,brand,gender,age_group,good_for_acne,good_for_redness,good_for_pigmentation,good_for_wrinkles
+Effaclar Duo (+),La Roche-Posay,unisex,2,1,0,0,0
+Effaclar Purifying Foaming Gel,La Roche-Posay,unisex,1,1,0,0,0
+CeraVe Foaming Facial Cleanser,CeraVe,unisex,1,1,0,0,0
+CeraVe Hydrating Cleanser,CeraVe,unisex,2,0,1,0,0
+Niacinamide 10% + Zinc 1%,The Ordinary,unisex,1,1,1,1,0
+Salicylic Acid 2% Solution,The Ordinary,unisex,1,1,0,0,0
+Glycolic Acid 7% Toning Solution,The Ordinary,unisex,2,0,0,1,0
+Hydro Boost Water Gel,Neutrogena,female,1,0,1,0,0
+Oil-Free Acne Wash,Neutrogena,unisex,1,1,0,0,0
+Retinol 0.5% in Squalane,The Ordinary,unisex,3,0,0,0,1
+Retinol Correxion Night Cream,RoC,female,3,0,0,0,1
+Vitamin C Suspension 23%,The Ordinary,unisex,2,0,0,1,1
+CE Ferulic,Skinceuticals,unisex,3,0,0,1,1
+Redness Relief Night Cream,Eucerin,unisex,2,0,1,0,0
+Anti-Redness Serum,Avene,unisex,2,0,1,0,0
+Cleanance Cleansing Gel,Avene,unisex,1,1,0,0,0
+Tea Tree Facial Wash,The Body Shop,unisex,1,1,0,0,0
+Ultra Facial Cream,Kiehl's,unisex,2,0,1,0,1
+Calendula Toner,Kiehl's,unisex,2,0,1,0,0
+Dark Spot Correcting Serum,Kiehl's,unisex,2,0,0,1,0
+Advanced Night Repair,Estée Lauder,female,3,0,1,1,1
+Revitalift Hyaluronic Acid Serum,L'Oréal,female,2,0,0,0,1
+Men Expert Hydra Energetic,L'Oréal,male,1,0,0,0,0
+Bulldog Oil Control Face Wash,Bulldog,male,1,1,0,0,0
+Clinique Acne Solutions Foam,Clinique,unisex,1,1,0,0,0
+Dramatically Different Lotion,Clinique,unisex,2,0,1,0,0
+Clearcalm Gel Cream,REN,unisex,2,0,1,0,0
+Blemish + Age Defense,Skinceuticals,unisex,3,1,0,1,1
+Pigmentclar Serum,La Roche-Posay,unisex,2,0,0,1,0
+Hyalu B5 Serum,La Roche-Posay,unisex,2,0,1,0,1
