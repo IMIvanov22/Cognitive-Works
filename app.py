@@ -7,7 +7,7 @@ from PIL import Image
 
 app = Flask(__name__)
 app.secret_key = 'skincare-secret-key'
-db = Database(app, wipeDB= True, backend='sqlite')
+db = Database(app, wipeDB= False, backend='sqlite')
 
 predictor = None
 def get_predictor():
